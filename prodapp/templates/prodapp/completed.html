@@ -1,0 +1,38 @@
+{% extends 'prodapp/base.html' %} {% load static %}
+{% load crispy_forms_tags%}
+{% block content %}
+
+
+<div class="container">
+  {% if not todos_done %}
+
+  <table class="table table-striped table-bordered table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for todo,serial in todos %}
+        <th scope="row">{{serial}}</th>
+        <td>{{todo.title}}</td>
+        <!-- <td>{{todo.score}}</td> -->
+        <td><a href="{% url 'delete-todo' todo.id%}"><i class="fa fa-trash fa-2x"></i></a></td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  <a href="{% url 'home' %}" class="btn btn-outline-secondary" >
+    Back
+  </a>
+  {%else%}
+  <h4>NO Completed tasks untill now!! PLease Check <a href="{% url 'pending-todo' %}"  > Pending
+  </a> </h4>
+  {% endif %}
+</div><br><br>
+
+
+{% endblock content %}
